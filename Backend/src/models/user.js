@@ -20,5 +20,21 @@ const userSchema = new Schema({
     password: {type : String, required: true, minLength:6}
 },{timestamps:true})
 
+const accountSchema = new Schema({
+    userId : {type : Schema.Types.ObjectId , ref: "User", required:true} ,
+    balance : {type : Number, required:true}
+})
+
 const User = mongoose.model("User",userSchema);
-module.exports = User;
+const Account = mongoose.model("Account",accountSchema);
+
+module.exports = {User,Account};
+
+
+/* 
+    https://medium.com/@mendes.develop/joining-tables-in-mongodb-with-mongoose-489d72c84b60#:~:text=Just%20like%20SQL%20databases%2C%20MongoDB,other%20collections%20by%20reference%20IDs.
+ */
+
+
+    /*  
+      Difference between Document and Model */
