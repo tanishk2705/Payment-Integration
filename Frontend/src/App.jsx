@@ -9,6 +9,7 @@ import {SendMoney} from "./pages/SendMoney"
 
 
 function App() {
+  console.log("App page")
   return (
     <>
       <BrowserRouter>

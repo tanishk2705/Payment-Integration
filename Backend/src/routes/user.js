@@ -11,14 +11,17 @@ const {authMiddleware} = require("../middlewares/authMiddleware")
 const signupSchema = z.object({
     firstName : z.string(),
     lastName : z.string(),
+    userName : z.string().email(),
+    password:  z.string()
     
 }) 
 
 userRouter.post("/signup",async (req,res)=>{
-      const {validInput} = signupSchema.safeParse(req.body);
-      if(!validInput){
+      const parsed = signupSchema.safeParse(req.body);
+      if(!parsed.success){
          res.status(411).json({
-                message:"Invalid Input"
+                message:"Invalid Input",
+                errors: parsed.error.issues,
          })
       }
 
@@ -26,7 +29,7 @@ userRouter.post("/signup",async (req,res)=>{
          userName: req.body.userName
       })
 
-      if(existingUser._id){
+      if(existingUser){
         res.status(411).json({
                 message:"User already exist"
          })
@@ -62,12 +65,13 @@ const signinSchema = z.object({
 })
 
 userRouter.post("/signin",async (req,res) => {
-      const {validInput} = signinSchema.safeParse(req.body);
-      if(!validInput){
-         res.status(411).json({
-                message:"Invalid Input"
-         })
-      }
+   const parsed = signinSchema.safeParse(req.body);
+   if(!parsed.success){
+      res.status(411).json({
+             message:"Invalid Input",
+             errors: parsed.error.issues,
+      })
+   }
 
       const user = await User.findOne({
         userName:req.body.userName
@@ -103,8 +107,8 @@ const updateBody = z.object({
 
 userRouter.put("/",authMiddleware,async (req,res) =>{
   try{
-     const {validInput} = updateBody.safeParse(req.body);
-     if(!validInput){
+     const parsed = updateBody.safeParse(req.body);
+     if(!parsed.success){
       throw new Error("Invalid Input")
      }
 
