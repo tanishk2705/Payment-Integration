@@ -3,7 +3,8 @@ const userRouter = express.Router();
 const {z} = require("zod");
 const {User,Account} = require("../models/user");
 const jwt = require("jsonwebtoken");
-const JWT_SECRET = require("../config/config");
+require("dotenv").config();
+const JWT_SECRET = process.env.JWT_SECRET;
 const bcrypt = require("bcrypt")
 const saltRounds = 10;
 const {authMiddleware} = require("../middlewares/authMiddleware")
@@ -151,7 +152,7 @@ userRouter.get("/bulk",async (req,res) => {
         userName: user.userName,
         firstName: user.firstName,
         lastName: user.lastName,
-        _id:user.user._id
+        _id: user._id
      }))
     }) 
 
