@@ -1,6 +1,6 @@
 const express = require("express")
 const  jwt  = require("jsonwebtoken")
-const { User } = require("../models/user")
+const { User, Account } = require("../models/user")
 const meRouter = express.Router()
 const JWT_SECRET = process.env.JWT_SECRET
 
@@ -12,11 +12,10 @@ meRouter.get('/',async (req,res) => {
                 })
         }
 
-        console.log("Authorization header:", authHeader);
         const token = authHeader.split(' ')[1]
         try{
                 const decoded = await jwt.verify(token,JWT_SECRET)
-                const AccountData = await User.findOne({userId:decoded.userId})
+                const AccountData = await Account.findOne({userId:decoded.userId})
                 const userData = await User.findOne({_id:decoded.userId})
 
                 if(!userData || !AccountData){
