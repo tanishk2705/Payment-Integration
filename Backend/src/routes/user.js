@@ -50,7 +50,7 @@ userRouter.post("/signup",async (req,res)=>{
          balance : 1 + Math.random()*10000
       })
 
-      const token = jwt.sign({userId:user._id}, JWT_SECRET ,{ expiresIn: '1h' })
+      const token = jwt.sign({userId:user._id}, JWT_SECRET)
       res.json({
         message : "User created successfully",
         token : token,
@@ -92,7 +92,7 @@ userRouter.post("/signin",async (req,res) => {
          })
       }
 
-      const token = jwt.sign({userId:user._id},JWT_SECRET,{expiresIn:"1d"})
+      const token = jwt.sign({userId:user._id},JWT_SECRET)
 
       res.json({
         message : "Logged in succesfully",

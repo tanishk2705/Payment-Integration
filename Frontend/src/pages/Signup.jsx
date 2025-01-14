@@ -5,12 +5,14 @@ import { Heading } from "../components/Heading"
 import { InputBox } from "../components/InputBox"
 import { SubHeading } from "../components/SubHeading"
 import axios from "axios"
+import { useNavigate } from "react-router-dom"
 
 export const Signup = () => {
         const [firstName,setFirstName] = useState("")
         const [lastName,setLastName] = useState("")
         const [password,setPassword] = useState("")
         const [userName,setUserName] = useState("")
+        const navigate = useNavigate()
 
         return(
                 <div className="bg-slate-300 h-screen flex justify-center">
@@ -32,6 +34,7 @@ export const Signup = () => {
                                                                 password
                                                         })
                                                         localStorage.setItem("token",response.data.token) // don't know how response looks like
+                                                        navigate("/dashboard")
                                                 }} label={"Sign up"}/>
                                                 <BottomWarning label={"Alredy have an account?"} buttonText={"Sign in"} to={"/signin"}/>
                                         </div>
