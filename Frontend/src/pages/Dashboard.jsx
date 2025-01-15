@@ -23,7 +23,7 @@ export const Dashboard = () => {
                 }
 
                 try{
-                const res = await axios.get('http://localhost:3000/api/v1/me',config)
+                const res = await axios.get('https://payment-wallet-5wix.onrender.com/api/v1/me',config)
                 // Yaha pas gadbad hoga
                 setUsername(res.data.name[0].toUpperCase())
                 setBalance(parseInt(res.data.balance))

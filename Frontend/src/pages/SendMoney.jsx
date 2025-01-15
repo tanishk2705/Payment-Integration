@@ -13,7 +13,7 @@ export const SendMoney = () => {
                 }
                 
                 console.log("Token being sent:", localStorage.getItem('token'));
-                const response = await axios.get("http://localhost:3000/api/v1/me",config)
+                const response = await axios.get("https://payment-wallet-5wix.onrender.com/api/v1/me",config)
                 setBalance(Math.floor(response.data.balance))
                 console.log('API Response:', response.data);
                 console.log('Balance Value:', response.data.balance);
@@ -64,7 +64,7 @@ export const SendMoney = () => {
                                                         // pata nahi next line kyu
                                                         const inputPlaceholder = document.getElementById("amount")
                                                         if(amount>0){
-                                                        const response = await axios.post("http://localhost:3000/api/v1/account/transfer",{
+                                                        const response = await axios.post("https://payment-wallet-5wix.onrender.com/api/v1/account/transfer",{
                                                                 to : id,
                                                                 amount
                                                         },{

@@ -21,7 +21,7 @@ function App() {
      };
 
      try {
-      const res = await axios.get('http://localhost:3000/api/v1/me',config)
+      const res = await axios.get('https://payment-wallet-5wix.onrender.com/api/v1/me',config)
       if(res.data.valid){
         setValidToken(true)
       }
